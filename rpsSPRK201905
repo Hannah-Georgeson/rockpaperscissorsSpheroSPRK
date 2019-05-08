@@ -1,0 +1,51 @@
+var Response = 0;
+var DoneSpeaking = 0;
+
+
+async function startProgram() {
+	await starter();
+}
+
+async function responser() {
+	if (Response === 1) {
+		await speak('Rock', false);
+		setMainLed({ r: 182, g: 178, b: 194 });
+		await delay(3);
+		await starter();
+	}
+	if (Response === 2) {
+		await speak('Paper', false);
+		setMainLed({ r: 255, g: 255, b: 255 });
+		await delay(3);
+		await starter();
+	}
+	if (Response === 3) {
+		await speak('Scissors ', false);
+		setMainLed({ r: 235, g: 254, b: 255 });
+		await delay(3);
+		await starter();
+	}
+}
+
+async function starter() {
+	DoneSpeaking = 0;
+	setStabilization(false);
+	Response = 0;
+	await speak('Let’s play rock  paper scissors ', true);
+	await speak(' When it is saying, Shoot, shake.', true);
+	await speak('  Ready? ', true);
+	await delay(1);
+	await speak('Rock', true);
+	await speak('Paper', true);
+	await speak(' Scissors ', true);
+	await speak('SHOOT', true);
+	DoneSpeaking = 1;
+}
+
+async function onCollision() {
+	if (DoneSpeaking === 1) {
+		Response = getRandomInt(1, 3);
+		await responser();
+	}
+}
+registerEvent(EventType.onCollision, onCollision);
