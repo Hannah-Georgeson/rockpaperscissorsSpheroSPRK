@@ -32,7 +32,9 @@ async function starter() {
 	setStabilization(false);
 	Response = 0;
 	await speak('Let’s play rock  paper scissors ', true);
-	await speak(' When it is saying, Shoot, shake.', true);
+	await speak(' When it is saying', true);
+	await speak('Shoot ', true);
+	await speak('Shake', true);
 	await speak('  Ready? ', true);
 	await delay(1);
 	await speak('Rock', true);
